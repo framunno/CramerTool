@@ -1,0 +1,55 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": "$env{QT_DIR}"
+      }
+    },
+    {
+      "name": "ninja-debug",
+      "displayName": "Ninja - Debug",
+      "description": "Set QT_DIR to the Qt kit, e.g. C:/Qt/6.11.1/mingw_64",
+      "inherits": "base",
+      "generator": "Ninja",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+    },
+    {
+      "name": "ninja-release",
+      "displayName": "Ninja - Release",
+      "inherits": "base",
+      "generator": "Ninja",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "vs2022",
+      "displayName": "Visual Studio 2022 (x64)",
+      "inherits": "base",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "ninja-debug",   "configurePreset": "ninja-debug" },
+    { "name": "ninja-release", "configurePreset": "ninja-release" },
+    { "name": "vs2022-debug",   "configurePreset": "vs2022", "configuration": "Debug" },
+    { "name": "vs2022-release", "configurePreset": "vs2022", "configuration": "Release" }
+  ],
+  "testPresets": [
+    {
+      "name": "ninja-debug",
+      "configurePreset": "ninja-debug",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "ninja-release",
+      "configurePreset": "ninja-release",
+      "output": { "outputOnFailure": true }
+    }
+  ]
+}

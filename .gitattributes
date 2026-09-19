@@ -1,0 +1,16 @@
+# Normalize line endings in the repository, check out native on Windows.
+* text=auto
+
+*.cpp    text
+*.hpp    text
+*.in     text
+*.cmake  text
+*.md     text
+*.json   text
+*.yml    text
+*.ts     text
+*.rc     text working-tree-encoding=UTF-8
+
+*.png    binary
+*.ico    binary
+*.zip    binary

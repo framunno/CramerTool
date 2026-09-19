@@ -1,0 +1,22 @@
+---
+Language: Cpp
+BasedOnStyle: Microsoft
+Standard: c++20
+ColumnLimit: 120
+IndentWidth: 4
+AccessModifierOffset: -4
+BreakBeforeBraces: Allman
+AlwaysBreakTemplateDeclarations: Yes
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+BreakConstructorInitializers: BeforeComma
+PackConstructorInitializers: Never
+PointerAlignment: Left
+SpacesBeforeTrailingComments: 2
+FixNamespaceComments: true
+NamespaceIndentation: None
+IncludeBlocks: Preserve
+SortIncludes: CaseSensitive
+...

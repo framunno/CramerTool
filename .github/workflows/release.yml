@@ -1,0 +1,41 @@
+name: Release
+
+# Tag a commit to publish a build:
+#   git tag v01.01.00 && git push origin v01.01.00
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.*'
+          cache: true
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      - name: Package
+        run: cpack --config build/CPackConfig.cmake -C Release
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/dist/*.zip
+          generate_release_notes: true
